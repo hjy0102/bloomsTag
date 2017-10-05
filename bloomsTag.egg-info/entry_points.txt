@@ -1,0 +1,4 @@
+
+        [console_scripts]
+        blooms=blooms:cli
+    

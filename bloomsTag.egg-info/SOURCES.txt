@@ -1,0 +1,7 @@
+blooms.py
+bloomsTag.egg-info/PKG-INFO
+bloomsTag.egg-info/SOURCES.txt
+bloomsTag.egg-info/dependency_links.txt
+bloomsTag.egg-info/entry_points.txt
+bloomsTag.egg-info/requires.txt
+bloomsTag.egg-info/top_level.txt
