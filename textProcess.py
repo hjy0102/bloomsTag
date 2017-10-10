@@ -3,6 +3,8 @@
 # import click
 from nltk.corpus import wordnet
 from nltk.tokenize import word_tokenize as wt 
+from nltk.tokenize import sent_tokenize as sent_token
+from nltk.text import Text
 import nltk.data
 from random import randint
 
@@ -12,8 +14,16 @@ knowledge = ['cite', 'define', 'describe', 'draw']
 # Load the pretrained neural network
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
-# @click.command()
 def classify(question):
+    tokenized_question = sent_token(question)
+    print(tokenized_question)
+    for key in knowledge:
+        Text(tokenized_question).concordance(key)
+    return "hello"
+
+
+# @click.command()
+def syn_Replace(question):
     output = ""
 
     print(question)
@@ -51,5 +61,5 @@ def classify(question):
     print(output)
 
 
-    return "hello world from classify"
+    return "hello world from synReplace"
 
