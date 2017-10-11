@@ -41,7 +41,6 @@ def cli(config, tag, rephrase, question):
         return
     
 
-
 # @cli.command()
 # @click.option('--string', default="World", help='Your name')
 # ## click types

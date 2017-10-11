@@ -14,7 +14,8 @@ comprehension = ['add', 'approximate', 'articulate', 'associate', 'characterize'
 analysis = ['analyze', 'audit', 'blueprint', 'breadboard', 'breakdown', 'characterize', 'classify', 'compare', 'confirm', 'contrast', 'correlate', 'detect', 'diagnose', 'diagram', 'differentiate', 'discriminate', 'dissect', 'distinguish', 'document', 'ensure', 'examine', 'explain', 'explore', 'file', 'group', 'identify', 'illustrate', 'infer', 'interrupt', 'inventory', 'investigate', 'layout', 'manage', 'maximize', 'minimize', 'optimize', 'order', 'outline', 'prioritize', 'proofreed', 'query', 'relate', 'select', 'separate', 'size', 'divide', 'subdivide', 'train', 'transform']
 synthesis = ['abstract', 'animate', 'arrange', 'assemble', 'budget', 'categorize', 'code', 'combine', 'compile', 'compose', 'construct', 'cope', 'correspond', 'create', 'cultivate', 'debug', 'depict', 'design', 'develop', 'devise', 'dictate', 'enhance', 'explain', 'facilitate', 'format', 'formulate', 'generalize', 'generate', 'handle', 'improve', 'incorporate', 'integrate', 'interface', 'join', 'lecture', 'model', 'modify', 'network', 'organize', 'outline', 'overhaul', 'plan', 'portray', 'prepare', 'prescribe', 'produce', 'program', 'rearrange', 'reconstruct', 'relate', 'reorganize', 'revise', 'rewrite', 'specify', 'summarize', 'write']
 evaluation = ['appraise', 'assess', 'compare', 'conclude', 'contrast', 'counsel', 'criticize', 'critique', 'defend', 'determine', 'discriminate', 'estimate', 'evaluate', 'explain', 'grade', 'hire', 'interpret', 'judge', 'justify', 'measure', 'predict', 'prescribe', 'rank', 'rate', 'recommend', 'release', 'select', 'summarize', 'support', 'test', 'validate', 'verify']
-
+test = ['hello', 'world']
+test2 = ['great', 'home']
 # Load the pretrained neural network
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
@@ -35,8 +36,32 @@ def classify(question):
     bloomsHash['synthesis'] = countKeys(tokenized_question, bloomsHash)
     evaluation_keys = countKeys(tokenized_question, bloomsHash)
     bloomsHash['evaluation'] = evaluation_keys
-    print(bloomsHash)
+    #### FOR TESTING ONLY 
+    #####################
+    # test_key = countKeys(tokenized_question, test)
+    # bloomsHash['test'] = test_key
+    # test2_key = countKeys(tokenized_question, test2)
+    # bloomsHash['test2'] = test2_key
 
+    # print(bloomsHash)
+
+    condenseHash(bloomsHash)
+
+def condenseHash(myHash):
+    ## initialize keyword hash
+    condensed = {}
+    for key in myHash.keys():
+        condensed[key] = 0 
+
+    i = 0
+    while (i < len(myHash)):
+        head = list(myHash.keys()).pop(i)
+        for val in list(myHash.values()).pop(i):
+            condensed[head] = condensed[head] + list(myHash.values()).pop(i)[val]
+
+        i += 1
+    print(condensed)
+        
 
 def countKeys(tokens, keywords):
     ## initialize keyword hash

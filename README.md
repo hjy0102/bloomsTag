@@ -15,5 +15,6 @@ source venv/bin/activate
 ```
 
 ## Built With
-Click<br>
-NLTK
+Click: python command line framework<br>
+NLTK: python natural language processing library by Stanford<br>
+
