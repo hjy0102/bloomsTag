@@ -9,6 +9,7 @@ to auto-generate Bloom's Taxonomy classifiers based on inputted questions.
 """
 import click
 from textProcess import classify
+from textProcess import synReplace
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -21,21 +22,25 @@ pass_config = click.make_pass_decorator(Config, ensure=True)
 #click group works like click.command except groups can have sub-commands
 # @click.group()
 @click.command(context_settings=CONTEXT_SETTINGS)
-@click.option('--verbose', '-v', is_flag=True)
-@click.option('--home_directory', type=click.Path())
-@click.argument('question', type=str)
 @pass_config
-def cli(config, verbose, home_directory, question):
+@click.option('--tag', '-t', is_flag=True, default=True)
+@click.option('--rephrase', '-r', is_flag=True, default=False)
+@click.argument('question', type=str)
+def cli(config, tag, rephrase, question):
 
     """
     QUESTION is a string to be classified according to Blooms taxonomy
     """
-    config.verbose = verbose
-    if home_directory is None:
-        home_directory = '.'
-    config.home_directory = home_directory
-    # click.echo(classify(question))
-    classify(question)
+    config.tag = tag
+    if rephrase:
+        output = synReplace(question)
+        click.echo("Another way of saying '" + question + "' is :"  + output)
+        return
+    if tag:
+        classify(question)
+        return
+    
+
 
 # @cli.command()
 # @click.option('--string', default="World", help='Your name')

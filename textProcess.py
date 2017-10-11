@@ -17,10 +17,9 @@ evaluation = ['appraise', 'assess', 'compare', 'conclude', 'contrast', 'counsel'
 
 # Load the pretrained neural network
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+
 ## PRE: list(string) or string
 ## POST: bloom Tag
-# @click.group()
-# @click.command()
 def classify(question):
     tokenized_question = wt(question)
     bloomsHash = {}   
@@ -36,9 +35,7 @@ def classify(question):
     bloomsHash['synthesis'] = countKeys(tokenized_question, bloomsHash)
     evaluation_keys = countKeys(tokenized_question, bloomsHash)
     bloomsHash['evaluation'] = evaluation_keys
-    
     print(bloomsHash)
-
 
 
 def countKeys(tokens, keywords):
@@ -55,22 +52,15 @@ def countKeys(tokens, keywords):
     return keyHash
 
 
-# @click.command()
 # PRE: QUESTION is a string
 # POST: rewrites the sentence by replacing original statement with synonymns
-def syn_Replace(question):
+def synReplace(question):
     output = ""
 
-    print(question)
-    print(question[0])
     # tokenize the input
     tokens = tokenizer.tokenize(question)
-    print(tokens)
     words = wt(question)
     tagged_tokens = nltk.pos_tag(words)
-
-    print(words)
-    print(tagged_tokens)
 
     for i in range(0, len(words)):
         replacements = []
@@ -93,8 +83,6 @@ def syn_Replace(question):
         else:
             output = output + " " + words[i]
         
-    print(output)
-
-
-    return "hello world from synReplace"
+    # print(output)
+    return output
 
