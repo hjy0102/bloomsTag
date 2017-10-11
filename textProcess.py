@@ -1,5 +1,4 @@
 """ helper function to process string input """
-# import nltk
 import click
 from nltk.corpus import wordnet
 from nltk.tokenize import word_tokenize as wt 
@@ -57,6 +56,8 @@ def countKeys(tokens, keywords):
 
 
 # @click.command()
+# PRE: QUESTION is a string
+# POST: rewrites the sentence by replacing original statement with synonymns
 def syn_Replace(question):
     output = ""
 
