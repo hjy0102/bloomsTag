@@ -26,15 +26,16 @@ pass_config = click.make_pass_decorator(Config, ensure=True)
 @click.argument('question', type=str)
 @pass_config
 def cli(config, verbose, home_directory, question):
+
     """
     QUESTION is a string to be classified according to Blooms taxonomy
     """
     config.verbose = verbose
-    classify(question)
     if home_directory is None:
         home_directory = '.'
     config.home_directory = home_directory
-    click.echo(classify(question))
+    # click.echo(classify(question))
+    classify(question)
 
 # @cli.command()
 # @click.option('--string', default="World", help='Your name')
